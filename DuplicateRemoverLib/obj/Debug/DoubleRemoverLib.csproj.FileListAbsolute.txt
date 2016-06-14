@@ -1,0 +1,7 @@
+F:\Dropbox\Visual Studio\DoubleRemover\DoubleRemoverLib\bin\Debug\DoubleRemoverLib.dll
+F:\Dropbox\Visual Studio\DoubleRemover\DoubleRemoverLib\bin\Debug\DoubleRemoverLib.pdb
+F:\Dropbox\Visual Studio\DoubleRemover\DoubleRemoverLib\bin\Debug\log4net.dll
+F:\Dropbox\Visual Studio\DoubleRemover\DoubleRemoverLib\bin\Debug\log4net.xml
+F:\Dropbox\Visual Studio\DoubleRemover\DoubleRemoverLib\obj\Debug\DoubleRemoverLib.csprojResolveAssemblyReference.cache
+F:\Dropbox\Visual Studio\DoubleRemover\DoubleRemoverLib\obj\Debug\DoubleRemoverLib.dll
+F:\Dropbox\Visual Studio\DoubleRemover\DoubleRemoverLib\obj\Debug\DoubleRemoverLib.pdb

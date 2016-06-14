@@ -1,0 +1,6 @@
+F:\Dropbox\Visual Studio\DoubleRemover\DuplicateRemoverCLI\bin\Debug\DoubleRemoverCLI.exe.config
+F:\Dropbox\Visual Studio\DoubleRemover\DuplicateRemoverCLI\obj\Debug\DoubleRemoverCLI.exe
+F:\Dropbox\Visual Studio\DoubleRemover\DuplicateRemoverCLI\obj\Debug\DoubleRemoverCLI.pdb
+C:\Users\tigra\Source\Repos\duplicate-remover\DuplicateRemoverCLI\bin\Debug\DoubleRemoverCLI.exe.config
+C:\Users\tigra\Source\Repos\duplicate-remover\DuplicateRemoverCLI\obj\Debug\DoubleRemoverCLI.exe
+C:\Users\tigra\Source\Repos\duplicate-remover\DuplicateRemoverCLI\obj\Debug\DoubleRemoverCLI.pdb

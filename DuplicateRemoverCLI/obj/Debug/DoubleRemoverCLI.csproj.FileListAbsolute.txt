@@ -1,0 +1,37 @@
+C:\Users\Timo\Dropbox\Visual Studio 2012\DoubleRemover\DoubleRemoverCLI\obj\Debug\DoubleRemoverCLI.csprojResolveAssemblyReference.cache
+C:\Users\Timo\Dropbox\Visual Studio 2012\DoubleRemover\DoubleRemoverCLI\obj\Debug\DoubleRemoverCLI.exe
+C:\Users\Timo\Dropbox\Visual Studio 2012\DoubleRemover\DoubleRemoverCLI\obj\Debug\DoubleRemoverCLI.pdb
+\\Freenas\tv\Chuck\DoubleRemoverCLI.exe.config
+C:\Users\Timo\Dropbox\Visual Studio 2012\DoubleRemover\DoubleRemoverCLI\DoubleRemoverCLI.exe.config
+C:\Users\Timo\Dropbox\Visual Studio 2012\DoubleRemover\DoubleRemoverCLI\DoubleRemoverCLI.exe
+C:\Users\Timo\Dropbox\Visual Studio 2012\DoubleRemover\DoubleRemoverCLI\DoubleRemoverCLI.pdb
+C:\Users\Timo\Dropbox\Visual Studio 2012\DoubleRemover\DoubleRemoverCLI\log4net.dll
+C:\Users\Timo\Dropbox\Visual Studio 2012\DoubleRemover\DoubleRemoverCLI\log4net.xml
+C:\Users\Timo\Dropbox\Visual Studio 2012\DoubleRemover\DoubleRemoverCLI\bin\DoubleRemoverCLI.exe.config
+C:\Users\Timo\Dropbox\Visual Studio 2012\DoubleRemover\DoubleRemoverCLI\bin\Debug\DoubleRemoverCLI.exe.config
+C:\Users\Timo\Dropbox\Visual Studio 2012\DoubleRemover\DoubleRemoverCLI\bin\Debug\DoubleRemoverCLI.exe
+C:\Users\Timo\Dropbox\Visual Studio 2012\DoubleRemover\DoubleRemoverCLI\bin\Debug\DoubleRemoverCLI.pdb
+C:\Users\Timo\Dropbox\Visual Studio 2012\DoubleRemover\DoubleRemoverCLI\bin\Debug\log4net.dll
+C:\Users\Timo\Dropbox\Visual Studio 2012\DoubleRemover\DoubleRemoverCLI\bin\Debug\log4net.xml
+G:\Dropbox\Visual Studio\DoubleRemover\DoubleRemoverCLI\bin\Debug\DoubleRemoverCLI.exe.config
+G:\Dropbox\Visual Studio\DoubleRemover\DoubleRemoverCLI\obj\Debug\DoubleRemoverCLI.exe
+G:\Dropbox\Visual Studio\DoubleRemover\DoubleRemoverCLI\obj\Debug\DoubleRemoverCLI.pdb
+G:\Dropbox\Visual Studio\DoubleRemover\DoubleRemoverCLI\bin\Debug\DoubleRemoverCLI.exe
+G:\Dropbox\Visual Studio\DoubleRemover\DoubleRemoverCLI\bin\Debug\DoubleRemoverCLI.pdb
+G:\Dropbox\Visual Studio\DoubleRemover\DoubleRemoverCLI\bin\Debug\log4net.dll
+G:\Dropbox\Visual Studio\DoubleRemover\DoubleRemoverCLI\bin\Debug\log4net.xml
+G:\Dropbox\Visual Studio\DoubleRemover\DoubleRemoverCLI\obj\Debug\DoubleRemoverCLI.csprojResolveAssemblyReference.cache
+G:\Dropbox\Visual Studio\DoubleRemover\DoubleRemoverCLI\bin\Debug\MoreLinq.dll
+G:\Dropbox\Visual Studio\DoubleRemover\DoubleRemoverCLI\bin\Debug\MoreLinq.xml
+F:\Dropbox\Visual Studio\DoubleRemover\DoubleRemoverCLI\bin\Debug\DoubleRemoverCLI.exe.config
+F:\Dropbox\Visual Studio\DoubleRemover\DoubleRemoverCLI\obj\Debug\DoubleRemoverCLI.exe
+F:\Dropbox\Visual Studio\DoubleRemover\DoubleRemoverCLI\obj\Debug\DoubleRemoverCLI.pdb
+F:\Dropbox\Visual Studio\DoubleRemover\DoubleRemoverCLI\obj\Debug\DoubleRemoverCLI.csprojResolveAssemblyReference.cache
+F:\Dropbox\Visual Studio\DoubleRemover\DoubleRemoverCLI\bin\Debug\DoubleRemoverCLI.exe
+F:\Dropbox\Visual Studio\DoubleRemover\DoubleRemoverCLI\bin\Debug\DoubleRemoverCLI.pdb
+F:\Dropbox\Visual Studio\DoubleRemover\DoubleRemoverCLI\bin\Debug\DoubleRemoverLib.dll
+F:\Dropbox\Visual Studio\DoubleRemover\DoubleRemoverCLI\bin\Debug\log4net.dll
+F:\Dropbox\Visual Studio\DoubleRemover\DoubleRemoverCLI\bin\Debug\MoreLinq.dll
+F:\Dropbox\Visual Studio\DoubleRemover\DoubleRemoverCLI\bin\Debug\DoubleRemoverLib.pdb
+F:\Dropbox\Visual Studio\DoubleRemover\DoubleRemoverCLI\bin\Debug\log4net.xml
+F:\Dropbox\Visual Studio\DoubleRemover\DoubleRemoverCLI\bin\Debug\MoreLinq.xml
