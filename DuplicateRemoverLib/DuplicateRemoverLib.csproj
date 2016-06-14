@@ -44,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ControlledDirectory.cs" />
     <Compile Include="FileHasher.cs" />
     <Compile Include="FilesystemCombiner.cs" />
     <Compile Include="FilesystemScanner.cs" />
