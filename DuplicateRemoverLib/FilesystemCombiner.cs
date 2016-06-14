@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DoubleRemover
+namespace DuplicateRemover
 {
     public class FilesystemCombiner
     {

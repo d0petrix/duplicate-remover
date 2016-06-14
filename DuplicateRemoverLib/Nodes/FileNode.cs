@@ -1,4 +1,4 @@
-﻿using DoubleRemover;
+﻿using DuplicateRemover;
 using System;
 using System.Collections.Generic;
 using System.IO;

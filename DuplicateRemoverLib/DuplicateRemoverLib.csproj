@@ -7,8 +7,8 @@
     <ProjectGuid>{887DFB4C-B342-463E-B6BA-25A473734255}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DoubleRemover</RootNamespace>
-    <AssemblyName>DoubleRemoverLib</AssemblyName>
+    <RootNamespace>DuplicateRemoverLib</RootNamespace>
+    <AssemblyName>DuplicateRemoverLib</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
