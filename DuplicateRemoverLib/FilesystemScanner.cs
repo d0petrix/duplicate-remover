@@ -12,6 +12,11 @@ public class FilesystemScanner
 {
     private static readonly ILog log = LogManager.GetLogger(typeof(FilesystemScanner));
 
+    public DirectoryNode Scan(string dir)
+    {
+        return Scan(new DirectoryInfo(dir));
+    }
+
     public DirectoryNode Scan(DirectoryInfo dir)
     {
         return ScanRecursive(dir);
@@ -32,7 +37,7 @@ public class FilesystemScanner
         {
             var fileNode = new FileNode(f, dirNode);
             log.Debug(fileNode.FullName);
-            fileNode.CalculateHash();
+            //fileNode.CalculateHash();
             dirNode.Add(fileNode);
         }
 

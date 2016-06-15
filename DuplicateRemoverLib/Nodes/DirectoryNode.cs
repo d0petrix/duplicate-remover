@@ -5,6 +5,7 @@ using System.Linq;
 
 namespace Nodes
 {
+    [Serializable]
     public class DirectoryNode : FilesystemNode
     {
         private List<FilesystemNode> children;

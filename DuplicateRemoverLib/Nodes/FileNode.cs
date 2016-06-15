@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace Nodes
 {
+    [Serializable]
     public class FileNode : FilesystemNode
     {
 

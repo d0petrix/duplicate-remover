@@ -1,7 +1,10 @@
-﻿using System;
+﻿using Nodes;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -15,7 +18,7 @@ namespace DuplicateRemoverLib
 
         public string CacheFilename { get; private set; }
 
-        public ControlledDirectory RootNode;
+        public DirectoryNode RootNode;
 
         public ControlledDirectory(string name, string rootPath)
         {
@@ -24,8 +27,27 @@ namespace DuplicateRemoverLib
             CacheFilename = Path.Combine(appDataPath, "Cache", Name + ".cache");
         }
 
+        public void Update()
+        {
+            var scanner = new FilesystemScanner();
+            var newRoot = scanner.Scan(RootPath);
+            var filesystemCombiner = new FilesystemCombiner();
+            var result = filesystemCombiner.Combine(RootNode, newRoot);
+        }
+
         public void Load()
         {
+
+        }
+
+        public void Save()
+        {
+            IFormatter formatter = new BinaryFormatter();
+            using (var stream = new FileStream(CacheFilename, FileMode.Create, FileAccess.Write, FileShare.None))
+            {
+                formatter.Serialize(stream, RootNode);
+                stream.Close();
+            }
 
         }
     }

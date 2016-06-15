@@ -1,4 +1,5 @@
-﻿using log4net;
+﻿using DuplicateRemoverLib;
+using log4net;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,8 +16,11 @@ namespace DuplicateRemoverCLI
         {
             log4net.Config.XmlConfigurator.Configure();
 
-            var scanner = new FilesystemScanner();
-            scanner.Scan(new System.IO.DirectoryInfo(@"\\freenas\TV"));
+            var controlledDirectory = new ControlledDirectory("TV", @"\\freenas\TV");
+
+            controlledDirectory.Update();
+
+            controlledDirectory.Save();
 
             Console.ReadLine();
         }
