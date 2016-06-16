@@ -1,8 +1,9 @@
 ﻿using System;
 
 
-namespace Nodes { 
+namespace Nodes {
 
+    [Serializable]
     public class FilesystemNode
     {
         public string Name;

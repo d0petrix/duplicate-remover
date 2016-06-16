@@ -22,9 +22,10 @@ namespace DuplicateRemoverLib
 
         public ControlledDirectory(string name, string rootPath)
         {
+            Name = name;
             RootPath = rootPath;
             var appDataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-            CacheFilename = Path.Combine(appDataPath, "Cache", Name + ".cache");
+            CacheFilename = Path.Combine(appDataPath, "DuplicateRemover", Name + ".cache");
         }
 
         public void Update()
@@ -33,6 +34,7 @@ namespace DuplicateRemoverLib
             var newRoot = scanner.Scan(RootPath);
             var filesystemCombiner = new FilesystemCombiner();
             var result = filesystemCombiner.Combine(RootNode, newRoot);
+            RootNode = newRoot;
         }
 
         public void Load()
@@ -43,6 +45,7 @@ namespace DuplicateRemoverLib
         public void Save()
         {
             IFormatter formatter = new BinaryFormatter();
+            Directory.CreateDirectory(Path.GetDirectoryName(CacheFilename));
             using (var stream = new FileStream(CacheFilename, FileMode.Create, FileAccess.Write, FileShare.None))
             {
                 formatter.Serialize(stream, RootNode);

@@ -15,6 +15,8 @@ public class SynchronisationResult
 
     public List<FilesystemNode> ModifiedNodes { get; private set; }
 
+    public DirectoryNode Root { get; internal set; }
+
     public SynchronisationResult()
     {
         RemovedNodes = new List<FilesystemNode>();
