@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.IO.Compression;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
@@ -25,7 +26,8 @@ namespace DuplicateRemoverLib
             Name = name;
             RootPath = rootPath;
             var appDataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-            CacheFilename = Path.Combine(appDataPath, "DuplicateRemover", Name + ".cache");
+            CacheFilename = Path.Combine(appDataPath, "DuplicateRemover", Name + ".cache.gzip");
+            Load();
         }
 
         public void Update()
@@ -39,14 +41,25 @@ namespace DuplicateRemoverLib
 
         public void Load()
         {
-
+            try
+            {
+                using (var stream = new GZipStream(new FileStream(CacheFilename, FileMode.Open, FileAccess.Read, FileShare.None), CompressionMode.Decompress))
+                {
+                    var formatter = new BinaryFormatter();
+                    RootNode = (DirectoryNode)formatter.Deserialize(stream);
+                }
+            }
+            catch (FileNotFoundException)
+            {
+                // nothing to load
+            } 
         }
 
         public void Save()
         {
             IFormatter formatter = new BinaryFormatter();
             Directory.CreateDirectory(Path.GetDirectoryName(CacheFilename));
-            using (var stream = new FileStream(CacheFilename, FileMode.Create, FileAccess.Write, FileShare.None))
+            using (var stream = new GZipStream(new FileStream(CacheFilename, FileMode.Create, FileAccess.Write, FileShare.None), CompressionLevel.Fastest))
             {
                 formatter.Serialize(stream, RootNode);
                 stream.Close();
