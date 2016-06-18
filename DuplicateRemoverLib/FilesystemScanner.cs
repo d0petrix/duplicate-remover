@@ -37,7 +37,6 @@ public class FilesystemScanner
         {
             var fileNode = new FileNode(f, dirNode);
             log.Debug(fileNode.FullName);
-            //fileNode.CalculateHash();
             dirNode.Add(fileNode);
         }
 
