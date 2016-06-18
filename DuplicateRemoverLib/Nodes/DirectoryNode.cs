@@ -17,6 +17,21 @@ namespace Nodes
         /// </summary>
         public List<FileNode> Files { get { return Children.OfType<FileNode>().ToList(); } }
 
+        public List<FileNode> FilesRecursive
+        {
+            get
+            {
+                var files = Children.OfType<FileNode>().ToList();
+
+                foreach (var dir in Directories)
+                {
+                    files.AddRange(dir.FilesRecursive);
+                }
+
+                return files;
+            }
+        }
+
         /// <summary>
         /// All directories in this directory
         /// </summary>
