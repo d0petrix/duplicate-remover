@@ -1,4 +1,5 @@
-﻿using log4net;
+﻿using DuplicateRemoverLib;
+using log4net;
 using Nodes;
 using System;
 using System.Collections.Generic;
@@ -26,7 +27,7 @@ public class FilesystemScanner
     {
         var dirNode = new DirectoryNode(dir, parent);
 
-        log.Debug(dirNode.FullName);
+        //log.Debug(dirNode.FullName);
 
         foreach (var d in dir.GetDirectories())
         {
@@ -36,7 +37,7 @@ public class FilesystemScanner
         foreach (var f in dir.GetFiles())
         {
             var fileNode = new FileNode(f, dirNode);
-            log.Debug(fileNode.FullName);
+            //log.Debug(fileNode.FullName);
             dirNode.Add(fileNode);
         }
 
