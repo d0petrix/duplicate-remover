@@ -11,5 +11,9 @@ namespace DuplicateRemoverLib
 
         double Value { get; }
 
+        void Start();
+
+        void Stop();
+
     }
 }
