@@ -27,7 +27,6 @@ namespace DuplicateRemoverLib
             RootPath = rootPath;
             var appDataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
             CacheFilename = Path.Combine(appDataPath, "DuplicateRemover", Name + ".cache.gzip");
-            Load();
         }
 
         public void Update()
@@ -65,6 +64,22 @@ namespace DuplicateRemoverLib
                 stream.Close();
             }
 
+        }
+
+        public void Hash(int count = 0)
+        {
+            var unhashedFiles = RootNode.FilesRecursive.Where(file => file.Hash1K == null).ToList();
+
+            foreach (var file in unhashedFiles)
+            {
+                file.Calculate1kHash();
+
+                if (count > 0)
+                {
+                    count--;
+                    if (count == 0) return;
+                }
+            }
         }
     }
 }

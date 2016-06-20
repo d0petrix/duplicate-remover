@@ -18,9 +18,21 @@ namespace DuplicateRemoverCLI
 
             var controlledDirectory = new ControlledDirectory("TV", @"\\freenas\TV");
 
-            controlledDirectory.Update();
+            Console.Write("Loading cache... ");
+            controlledDirectory.Load();
+            Console.WriteLine("Done");
 
+            Console.Write("Scanning directory... ");
+            controlledDirectory.Update();
+            Console.WriteLine("Done");
+
+            Console.Write("Hashing files... ");
+            controlledDirectory.Hash(1000);
+            Console.WriteLine("Done");
+
+            Console.Write("Saving cache... ");
             controlledDirectory.Save();
+            Console.WriteLine("Done");
 
             Console.ReadLine();
         }
