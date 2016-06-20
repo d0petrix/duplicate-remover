@@ -17,7 +17,15 @@ namespace DuplicateRemoverLib
 
         public string RootPath { get; private set; }
 
-        public string CacheFilename { get; private set; }
+        public string CacheFilename {
+            get
+            {
+                var appDataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+                return Path.Combine(RootPath, "DuplicateRemover.cache.gzip");
+            }
+        }
+
+        private FileStream cacheFile;
 
         public DirectoryNode RootNode;
 
@@ -25,8 +33,7 @@ namespace DuplicateRemoverLib
         {
             Name = name;
             RootPath = rootPath;
-            var appDataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-            CacheFilename = Path.Combine(appDataPath, "DuplicateRemover", Name + ".cache.gzip");
+            cacheFile = new FileStream(CacheFilename, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.None);
         }
 
         public void Update()
@@ -38,27 +45,28 @@ namespace DuplicateRemoverLib
             RootNode = newRoot;
         }
 
-        public void Load()
+        public bool Load()
         {
-            try
+            // New file
+            if (cacheFile.Length <= 0) return false;
+
+            cacheFile.Seek(0, SeekOrigin.Begin);
+
+            using (var stream = new GZipStream(cacheFile, CompressionMode.Decompress))
             {
-                using (var stream = new GZipStream(new FileStream(CacheFilename, FileMode.Open, FileAccess.Read, FileShare.None), CompressionMode.Decompress))
-                {
-                    var formatter = new BinaryFormatter();
-                    RootNode = (DirectoryNode)formatter.Deserialize(stream);
-                }
+                var formatter = new BinaryFormatter();
+                RootNode = (DirectoryNode)formatter.Deserialize(stream);
             }
-            catch (FileNotFoundException)
-            {
-                // nothing to load
-            } 
+
+            return true;
         }
 
         public void Save()
         {
+            cacheFile.Seek(0, SeekOrigin.Begin);
             IFormatter formatter = new BinaryFormatter();
             Directory.CreateDirectory(Path.GetDirectoryName(CacheFilename));
-            using (var stream = new GZipStream(new FileStream(CacheFilename, FileMode.Create, FileAccess.Write, FileShare.None), CompressionLevel.Fastest))
+            using (var stream = new GZipStream(cacheFile, CompressionLevel.Fastest))
             {
                 formatter.Serialize(stream, RootNode);
                 stream.Close();
