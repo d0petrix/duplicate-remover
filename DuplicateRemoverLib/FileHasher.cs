@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DuplicateRemoverLib.Hashing;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -13,7 +14,7 @@ namespace DuplicateRemover
         private ASCIIEncoding enc = new ASCIIEncoding();
         private MD5 md5 = MD5.Create();
 
-        public string Hash1KB(string filename)
+        public Hash Hash1KB(string filename)
         {
             try
             {
@@ -21,9 +22,7 @@ namespace DuplicateRemover
                 {
                     var buffer = new byte[1024];
                     var bytesRead = fileStream.Read(buffer, 0, 1024);
-                    var hash = md5.ComputeHash(buffer, 0, bytesRead);
-                    //var hashString = new string(enc.GetChars(hash));
-                    return ByteArrayToString(hash);
+                    return new Hash(md5.ComputeHash(buffer, 0, bytesRead));
                 }
             }
             catch (Exception)
@@ -32,22 +31,14 @@ namespace DuplicateRemover
             }
         }
 
-        public string Hash(string filename)
+        public Hash Hash(string filename)
         {
             using (var fileStream = File.OpenRead(filename))
             {
-                var hash = md5.ComputeHash(fileStream);
-                var hashString = new string(enc.GetChars(hash));
-                return hashString;
+                return new Hash(md5.ComputeHash(fileStream));
             }
         }
 
-        public static string ByteArrayToString(byte[] ba)
-        {
-            StringBuilder hex = new StringBuilder(ba.Length * 2);
-            foreach (byte b in ba)
-                hex.AppendFormat("{0:x2}", b);
-            return hex.ToString();
-        }
+
     }
 }

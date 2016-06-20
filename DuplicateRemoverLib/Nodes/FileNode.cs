@@ -1,4 +1,5 @@
 ﻿using DuplicateRemover;
+using DuplicateRemoverLib.Hashing;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -13,18 +14,17 @@ namespace Nodes
     {
 
         public long Length { get; set; }
-        public string Hash1K { get; set; }
+        public Hash Hash1K { get; set; }
 
         public FileNode(FileInfo fileInfo, DirectoryNode parent) : base(fileInfo.Name, fileInfo.CreationTime, fileInfo.LastWriteTime, parent)
         {
             Length = fileInfo.Length;
         }
 
-        public void CalculateHash()
+        public void Calculate1kHash()
         {
             var fileHash = new FileHasher();
             Hash1K = fileHash.Hash1KB(FullName);
-            Console.WriteLine(Hash1K);
         }
 
         public void Update(FileNode node)
