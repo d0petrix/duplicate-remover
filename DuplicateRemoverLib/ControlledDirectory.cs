@@ -40,7 +40,7 @@ namespace DuplicateRemoverLib
 
         public void Update()
         {
-            var scanner = new FilesystemScanner();
+            var scanner = new FilesystemScanner(Progress);
             var newRoot = scanner.Scan(RootPath);
             var filesystemCombiner = new FilesystemCombiner();
             var result = filesystemCombiner.Combine(RootNode, newRoot);

@@ -13,25 +13,44 @@ public class FilesystemScanner
 {
     private static readonly ILog log = LogManager.GetLogger(typeof(FilesystemScanner));
 
+    private AbstractProgressManager progress;
+
+    private double progressValue = 0.0;
+
+    public FilesystemScanner(AbstractProgressManager progress)
+    {
+        this.progress = progress;
+    }
+
     public DirectoryNode Scan(string dir)
     {
-        return Scan(new DirectoryInfo(dir));
+        progress.Start();
+        var node = Scan(new DirectoryInfo(dir));
+        progress.Stop();
+        return node;
     }
 
     public DirectoryNode Scan(DirectoryInfo dir)
     {
-        return ScanRecursive(dir);
+         return ScanRecursive(dir, 1);
     }
 
-    private DirectoryNode ScanRecursive(DirectoryInfo dir, DirectoryNode parent = null)
+    private DirectoryNode ScanRecursive(DirectoryInfo dir, double percentile, DirectoryNode parent = null)
     {
         var dirNode = new DirectoryNode(dir, parent);
 
         //log.Debug(dirNode.FullName);
 
-        foreach (var d in dir.GetDirectories())
+        var directories = dir.GetDirectories().ToArray();
+        foreach (var d in directories)
         {
-            dirNode.Add(ScanRecursive(d, dirNode));
+            dirNode.Add(ScanRecursive(d, percentile / (double)directories.Length, dirNode));
+        }
+
+        if (directories.Length == 0)
+        { 
+            progressValue += percentile;
+            progress.Update(progressValue, dir.Name);
         }
 
         foreach (var f in dir.GetFiles())

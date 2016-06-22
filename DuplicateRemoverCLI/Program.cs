@@ -30,6 +30,7 @@ namespace DuplicateRemoverCLI
                 Console.WriteLine(" Failed");
 
             Console.Write("Scanning directory...");
+            consoleProgress.SavePosition();
             controlledDirectory.Update();
             Console.WriteLine(" Done {1} Directories {0} Files", controlledDirectory.RootNode.FilesRecursive.Count, controlledDirectory.RootNode.DirectoriesRecursive.Count);
 
