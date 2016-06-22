@@ -21,7 +21,7 @@ namespace Nodes
         {
             get
             {
-                var files = Children.OfType<FileNode>().ToList();
+                var files = Files;
 
                 foreach (var dir in Directories)
                 {
@@ -36,6 +36,20 @@ namespace Nodes
         /// All directories in this directory
         /// </summary>
         public List<DirectoryNode> Directories { get { return Children.OfType<DirectoryNode>().ToList(); } }
+
+        public List<DirectoryNode> DirectoriesRecursive {
+            get
+            {
+                var directories = Directories;
+
+                foreach (var dir in Directories)
+                {
+                    directories.AddRange(dir.DirectoriesRecursive);
+                }
+
+                return directories;
+            }
+        }
 
         public string BasePath { get; private set; }
 

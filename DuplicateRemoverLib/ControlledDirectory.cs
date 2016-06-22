@@ -29,6 +29,8 @@ namespace DuplicateRemoverLib
 
         public DirectoryNode RootNode;
 
+        public AbstractProgressManager Progress { get; set; }
+
         public ControlledDirectory(string name, string rootPath)
         {
             Name = name;
@@ -52,7 +54,7 @@ namespace DuplicateRemoverLib
 
             cacheFile.Seek(0, SeekOrigin.Begin);
 
-            using (var stream = new GZipStream(cacheFile, CompressionMode.Decompress))
+            using (var stream = new GZipStream(cacheFile, CompressionMode.Decompress, true))
             {
                 var formatter = new BinaryFormatter();
                 RootNode = (DirectoryNode)formatter.Deserialize(stream);
@@ -66,28 +68,51 @@ namespace DuplicateRemoverLib
             cacheFile.Seek(0, SeekOrigin.Begin);
             IFormatter formatter = new BinaryFormatter();
             Directory.CreateDirectory(Path.GetDirectoryName(CacheFilename));
-            using (var stream = new GZipStream(cacheFile, CompressionLevel.Fastest))
+            using (var stream = new GZipStream(cacheFile, CompressionLevel.Fastest, true))
             {
                 formatter.Serialize(stream, RootNode);
-                stream.Close();
             }
 
         }
 
-        public void Hash(int count = 0)
+        public void Hash(int max = 0)
         {
+            Progress.Update(0, "");
+            Progress.Start();
             var unhashedFiles = RootNode.FilesRecursive.Where(file => file.Hash1K == null).ToList();
+
+            if (max == 0)
+                max = unhashedFiles.Count;
+
+            var count = 0;
 
             foreach (var file in unhashedFiles)
             {
                 file.Calculate1kHash();
+                count++;
 
-                if (count > 0)
+                Progress.Update((double)count / (double)max, file.Name);
+
+                if (count >= max)
                 {
-                    count--;
-                    if (count == 0) return;
+                    Progress.Update(1);
+                    Progress.Stop();
+                    return;
                 }
             }
+
+            Progress.Stop();
+        }
+
+        public List<List<FileNode>> FindDuplicates()
+        {
+            var dupliatesQuery = from file in RootNode.FilesRecursive
+                                 where file.Hash1K != null
+                                 group file by file.Hash1K into duplicates
+                                 where duplicates.ToList().Count > 1
+                                 select duplicates.ToList();
+
+            return dupliatesQuery.ToList();
         }
     }
 }

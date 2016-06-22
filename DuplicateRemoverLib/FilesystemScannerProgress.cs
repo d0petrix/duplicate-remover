@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DuplicateRemoverLib
 {
-    public class FilesystemScannerProgress : IProgressManager
+    public class FilesystemScannerProgress 
     {
 
         public int FilesCount;
@@ -20,6 +20,16 @@ namespace DuplicateRemoverLib
             {
                 return ((double)FilesCount + (double)DirectoriesCount) / ((double)FilesDone + (double) DirectoriesDone);
             }
+        }
+
+        public void Start()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Stop()
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -50,7 +50,7 @@
     <Compile Include="FilesystemScanner.cs" />
     <Compile Include="FilesystemScannerProgress.cs" />
     <Compile Include="Hashing\Hash.cs" />
-    <Compile Include="IProgressManager.cs" />
+    <Compile Include="AbstractProgressManager.cs" />
     <Compile Include="Nodes\DirectoryNode.cs" />
     <Compile Include="Nodes\FileNode.cs" />
     <Compile Include="Nodes\FilesystemNode.cs" />
