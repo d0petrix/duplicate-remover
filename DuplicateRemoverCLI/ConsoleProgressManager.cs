@@ -36,7 +36,6 @@ namespace DuplicateRemover
                     PrintToConsole();
                     Thread.Sleep(50);
                 } while (running);
-                               
 
             });
         }
@@ -56,7 +55,6 @@ namespace DuplicateRemover
             if (lastStatus != null && Status != null && lastStatus != Status && lastStatus.Length > Status.Length)
             {
                 text += new string(' ', lastStatus.Length - Status.Length);
-                //ConsoleEx.WriteAt(x + Status.Length + 5, y, new String(' ', lastStatus.Length - Status.Length));
             }
 
             lastStatus = Status;

@@ -14,24 +14,25 @@ namespace Nodes
     {
 
         public long Length { get; set; }
-        public Hash Hash1K { get; set; }
+        public Hash SmallHash { get; set; }
+        public Hash FullHash { get; set; }
 
         public FileNode(FileInfo fileInfo, DirectoryNode parent) : base(fileInfo.Name, fileInfo.CreationTime, fileInfo.LastWriteTime, parent)
         {
             Length = fileInfo.Length;
         }
 
-        public void Calculate1kHash()
+        public void CalculateSmallHash()
         {
             var fileHash = new FileHasher();
-            Hash1K = fileHash.Hash1KB(FullName);
+            SmallHash = fileHash.HashPart(FullName, 1024 * 4);
         }
 
         public void Update(FileNode node)
         {
             Update(node);
             Length = node.Length;
-            Hash1K = node.Hash1K;
+            SmallHash = node.SmallHash;
         }
 
         public override string ToString()
@@ -39,5 +40,10 @@ namespace Nodes
             return Name;
         }
 
+        internal void CalculateFullHash()
+        {
+            var fileHash = new FileHasher();
+            FullHash = fileHash.Hash(FullName);
+        }
     }
 }

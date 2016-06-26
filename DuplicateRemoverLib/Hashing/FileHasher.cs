@@ -14,15 +14,15 @@ namespace DuplicateRemover
         private ASCIIEncoding enc = new ASCIIEncoding();
         private MD5 md5 = MD5.Create();
 
-        public Hash Hash1KB(string filename)
+        public Hash HashPart(string filename, int length)
         {
             try
             {
                 using (var fileStream = File.OpenRead(filename))
                 {
-                    var buffer = new byte[1024];
-                    var bytesRead = fileStream.Read(buffer, 0, 1024);
-                    return new Hash(md5.ComputeHash(buffer, 0, bytesRead));
+                    var buffer = new byte[length];
+                    var bytesRead = fileStream.Read(buffer, 0, length);
+                    return new Hash(md5.ComputeHash(buffer, 0, bytesRead), length);
                 }
             }
             catch (Exception)
@@ -35,7 +35,8 @@ namespace DuplicateRemover
         {
             using (var fileStream = File.OpenRead(filename))
             {
-                return new Hash(md5.ComputeHash(fileStream));
+                var length = fileStream.Length;
+                return new Hash(md5.ComputeHash(fileStream), length);
             }
         }
 

@@ -36,7 +36,7 @@ public class FilesystemCombiner
                 // old node exists
                 if (oldFile.Length == newFile.Length && oldFile.LastWriteTime == newFile.LastWriteTime)
                     // reuse hash from old node
-                    newFile.Hash1K = oldFile.Hash1K;
+                    newFile.SmallHash = oldFile.SmallHash;
                 else
                     // file was modified
                     synchronisationResult.ModifiedNodes.Add(newFile);

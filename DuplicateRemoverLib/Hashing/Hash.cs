@@ -10,10 +10,12 @@ namespace DuplicateRemoverLib.Hashing
     public class Hash
     {
         public byte[] Value { get; private set; }
+        public long ChunkSize { get; private set; }
 
-        public Hash(byte[] value)
+        public Hash(byte[] value, long chunkSize)
         {
             Value = value;
+            ChunkSize = chunkSize;
         }
 
         public static string ByteArrayToString(byte[] ba)
@@ -22,6 +24,30 @@ namespace DuplicateRemoverLib.Hashing
             foreach (byte b in ba)
                 hex.AppendFormat("{0:x2}", b);
             return hex.ToString();
+        }
+
+        public override int GetHashCode()
+        {
+            return BitConverter.ToInt32(Value, 0);
+        }
+
+        public override bool Equals(object obj)
+        {
+            var other = obj as Hash;
+            if (other == null) return false;
+            if (other.Value.Length != Value.Length) return false;
+
+            for (var i = 0; i < Value.Length; i++)
+            {
+                if (Value[i] != other.Value[i]) return false;
+            }
+
+            return true;
+        }
+
+        public override string ToString()
+        {
+            return ByteArrayToString(Value);
         }
     }
 }

@@ -66,6 +66,7 @@ namespace DuplicateRemoverLib
         public void Save()
         {
             cacheFile.Seek(0, SeekOrigin.Begin);
+            cacheFile.SetLength(0);
             IFormatter formatter = new BinaryFormatter();
             Directory.CreateDirectory(Path.GetDirectoryName(CacheFilename));
             using (var stream = new GZipStream(cacheFile, CompressionLevel.Fastest, true))
@@ -73,13 +74,14 @@ namespace DuplicateRemoverLib
                 formatter.Serialize(stream, RootNode);
             }
 
+            cacheFile.Flush();
         }
 
         public void Hash(int max = 0)
         {
             Progress.Update(0, "");
             Progress.Start();
-            var unhashedFiles = RootNode.FilesRecursive.Where(file => file.Hash1K == null).ToList();
+            var unhashedFiles = RootNode.FilesRecursive.Where(file => file.SmallHash == null).ToList();
 
             if (max == 0)
                 max = unhashedFiles.Count;
@@ -88,7 +90,7 @@ namespace DuplicateRemoverLib
 
             foreach (var file in unhashedFiles)
             {
-                file.Calculate1kHash();
+                file.CalculateSmallHash();
                 count++;
 
                 Progress.Update((double)count / (double)max, file.Name);
@@ -107,10 +109,25 @@ namespace DuplicateRemoverLib
         public List<List<FileNode>> FindDuplicates()
         {
             var dupliatesQuery = from file in RootNode.FilesRecursive
-                                 where file.Hash1K != null
-                                 group file by file.Hash1K into duplicates
-                                 where duplicates.ToList().Count > 1
+                                 where file.SmallHash != null
+                                 group file by new { file.SmallHash, file.Length } into duplicates
+                                 where duplicates.ToList().Count > 1 && duplicates.Sum(d => d.Length) > 10* 1024 * 1024
                                  select duplicates.ToList();
+
+            var possibleDuplicates = dupliatesQuery.SelectMany(d => d).ToList();
+
+            //Progress.Update(0, "");
+            //Progress.Start();
+            //var count = 0;
+            //foreach (var possibleDuplicate in possibleDuplicates)
+            //{
+            //    Progress.Update((double)count / (double)possibleDuplicates.Count, possibleDuplicate.Name);
+            //    possibleDuplicate.CalculateFullHash();
+            //    count++;
+            //}
+
+            //Progress.Update(1);
+            //Progress.Stop();
 
             return dupliatesQuery.ToList();
         }
